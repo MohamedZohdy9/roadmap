@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خارطة الطريق الاستراتيجية · Strategic Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1015;
+    --bg-2: #14171f;
+    --surface: #1a1e28;
+    --surface-2: #232834;
+    --border: #2a3040;
+    --border-soft: #1f2431;
+    --text: #e8ebf2;
+    --text-muted: #8a93a8;
+    --text-dim: #5c6478;
+    --accent: #d4a574;
+    --accent-soft: #d4a57420;
+
+    /* Category ramps */
+    --erp-fill: #1a2a3e;    --erp-bar: #3a7fd4;    --erp-text: #8bb8ff;
+    --ai-fill: #251d3a;     --ai-bar: #8170e8;     --ai-text: #b8a8ff;
+    --fin-fill: #13302a;    --fin-bar: #3aa888;    --fin-text: #7cd4b8;
+    --hr-fill: #2e1e1a;     --hr-bar: #d47a4a;     --hr-text: #f0a888;
+    --data-fill: #2e1a28;   --data-bar: #d45a7e;   --data-text: #f0a0bc;
+
+    /* MoSCoW priorities */
+    --must-bar: #e85a5a;      --must-fill: #3a1818;     --must-text: #ffa8a8;
+    --should-bar: #e8a83a;    --should-fill: #3a2a10;   --should-text: #ffd48a;
+    --could-bar: #5aa8e8;     --could-fill: #152838;    --could-text: #8ac8ff;
+    --wont-bar: #6a7080;      --wont-fill: #1f2330;     --wont-text: #a8b0c0;
+
+    --status-ontrack: #3aa888;
+    --status-risk: #e8a83a;
+    --status-blocked: #e85a5a;
+    --status-done: #8170e8;
+  }
+
+  [data-theme="light"] {
+    --bg: #faf7f2;
+    --bg-2: #f0ebe2;
+    --surface: #ffffff;
+    --surface-2: #f5f1ea;
+    --border: #e0d9cc;
+    --border-soft: #ebe5d9;
+    --text: #1a1814;
+    --text-muted: #6a6558;
+    --text-dim: #9a9488;
+    --accent: #9a6a2a;
+    --accent-soft: #9a6a2a15;
+
+    --erp-fill: #e6f0fb;    --erp-bar: #2a6db8;    --erp-text: #1a4a85;
+    --ai-fill: #ece8fb;     --ai-bar: #6a55d4;     --ai-text: #3a2a8a;
+    --fin-fill: #e1f3ea;    --fin-bar: #1d8a6c;    --fin-text: #0f5c44;
+    --hr-fill: #faeae0;     --hr-bar: #c4652e;     --hr-text: #7a3a15;
+    --data-fill: #fae8ee;   --data-bar: #bd4578;   --data-text: #722445;
+
+    --must-bar: #d43838;    --must-fill: #fae5e5;    --must-text: #8a1a1a;
+    --should-bar: #c48515;  --should-fill: #faefd8;  --should-text: #6a4508;
+    --could-bar: #2a75c4;   --could-fill: #e0eefa;   --could-text: #154a85;
+    --wont-bar: #8a8a8a;    --wont-fill: #ececec;    --wont-text: #4a4a4a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  [dir="ltr"] body { font-family: 'IBM Plex Sans', 'IBM Plex Sans Arabic', sans-serif; }
+
+  .display { font-family: 'Fraunces', serif; font-weight: 400; letter-spacing: -0.02em; }
+
+  /* Layout */
+  .shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 40px 80px;
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .title {
+    font-size: 36px;
+    line-height: 1.1;
+    outline: none;
+    max-width: 700px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    outline: none;
+    max-width: 700px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    direction: ltr;
+  }
+  .btn {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--surface-2); border-color: var(--text-dim); }
+  .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn-primary:hover { opacity: 0.9; background: var(--accent); }
+  .btn-icon { padding: 9px 11px; }
+
+  /* KPIs */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .kpi-trend {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+  }
+  .kpi.success .kpi-value { color: var(--status-ontrack); }
+  .kpi.warn .kpi-value { color: var(--status-risk); }
+  .kpi.danger .kpi-value { color: var(--status-blocked); }
+
+  /* Filter bar */
+  .filters {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+  }
+  .filter-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-inline-end: 4px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .chip:hover { color: var(--text); }
+  .chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* Gantt table */
+  .gantt-card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .gantt-head {
+    display: grid;
+    grid-template-columns: 2.6fr 1fr 1fr 0.9fr 3fr 44px;
+    gap: 0;
+    padding: 14px 18px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 500;
+    align-items: center;
+  }
+  .gantt-head > div { padding-inline-end: 12px; }
+
+  .q-head {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    text-align: center;
+    border-inline-start: 1px solid var(--border-soft);
+    padding-inline-start: 12px;
+  }
+  .q-head > div {
+    padding: 4px 0;
+    font-size: 11px;
+    border-inline-start: 1px dashed var(--border-soft);
+  }
+  .q-head > div:first-child { border-inline-start: none; }
+
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 2.6fr 1fr 1fr 0.9fr 3fr 44px;
+    gap: 0;
+    padding: 16px 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
+    transition: background 0.15s ease;
+  }
+  .gantt-row:hover { background: var(--surface-2); }
+  .gantt-row:last-child { border-bottom: none; }
+  .gantt-row > * { padding-inline-end: 12px; }
+
+  .cell-title {
+    outline: none;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .cell-title:focus { background: var(--surface-2); border-radius: 6px; padding: 4px 8px; margin: -4px -8px; }
+
+  .cell-owner {
+    outline: none;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  select, input {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  select:hover, input:hover { border-color: var(--text-dim); }
+  select:focus, input:focus { border-color: var(--accent); }
+  select option { background: var(--surface); color: var(--text); }
+
+  .cat-select {
+    width: 100%;
+  }
+  .prio-select {
+    width: 100%;
+    font-weight: 600;
+  }
+
+  /* Gantt bar cells */
+  .gantt-cells {
+    position: relative;
+    height: 32px;
+    border-inline-start: 1px solid var(--border-soft);
+    padding-inline-start: 12px;
+  }
+  .q-grid {
+    position: absolute;
+    inset: 0 0 0 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    pointer-events: none;
+  }
+  .q-grid > div {
+    border-inline-start: 1px dashed var(--border-soft);
+  }
+  .q-grid > div:first-child { border-inline-start: none; }
+
+  .bar {
+    position: absolute;
+    top: 4px;
+    height: 24px;
+    border-radius: 8px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    font-size: 11px;
+    font-weight: 500;
+    transition: box-shadow 0.15s ease;
+  }
+  .bar:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+  .bar:active { cursor: grabbing; }
+  .bar-fill {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.45;
+  }
+  .bar-label {
+    position: relative;
+    z-index: 1;
+    padding: 0 10px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bar-prio-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    cursor: ew-resize;
+    z-index: 2;
+  }
+  .handle-l { inset-inline-start: 0; }
+  .handle-r { inset-inline-end: 0; }
+
+  .btn-del {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 20px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .btn-del:hover { background: var(--surface-2); color: var(--status-blocked); }
+
+  /* MoSCoW legend */
+  .legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 10px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    font-size: 12px;
+  }
+  .legend-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-inline-end: 20px;
+    border-inline-end: 1px solid var(--border-soft);
+  }
+  .legend-group:last-child { border: none; padding: 0; }
+  .legend-group-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .legend-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    inset-inline-end: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Detail side panel */
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 50;
+  }
+  .panel-overlay.open { opacity: 1; pointer-events: auto; }
+  .panel {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    width: 420px;
+    max-width: 90vw;
+    height: 100vh;
+    background: var(--surface);
+    border-inline-start: 1px solid var(--border);
+    padding: 28px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    z-index: 51;
+  }
+  [dir="rtl"] .panel { transform: translateX(-100%); }
+  .panel.open { transform: translateX(0); }
+  .panel-close {
+    position: absolute;
+    top: 18px;
+    inset-inline-end: 18px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 22px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+  .panel-close:hover { background: var(--surface-2); color: var(--text); }
+  .panel h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    padding-inline-end: 40px;
+  }
+  .panel-field {
+    margin-bottom: 16px;
+  }
+  .panel-field label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .panel-field input, .panel-field select, .panel-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+  }
+  .panel-field textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  .progress-display {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .shell { padding: 20px; }
+    .title { font-size: 26px; }
+    .gantt-head, .gantt-row { grid-template-columns: 1.8fr 0.8fr 0.8fr 2.2fr 40px; font-size: 12px; }
+    .gantt-head > div:nth-child(3), .gantt-row > *:nth-child(3) { display: none; }
+  }
+
+  /* Print — export to PDF via browser */
+  @media print {
+    body { background: white; color: black; }
+    .actions, .filters, .panel, .panel-overlay, .toast, .btn-del, .handle { display: none !important; }
+    .gantt-card, .kpi, .legend { border: 1px solid #ccc; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="eyebrow" data-ar="مستند الاستراتيجية" data-en="Strategy Document">مستند الاستراتيجية</div>
+      <div class="display title" contenteditable="true" id="doc-title" data-ar="خارطة الطريق الاستراتيجية — 2026" data-en="Strategic Roadmap — 2026">خارطة الطريق الاستراتيجية — 2026</div>
+      <div class="subtitle" contenteditable="true" id="doc-subtitle" data-ar="معدّة لمراجعة الرئيس التنفيذي · جميع الحقول قابلة للتعديل · يتم الحفظ تلقائيًا" data-en="Prepared for CEO review · all fields editable · autosaved locally">معدّة لمراجعة الرئيس التنفيذي · جميع الحقول قابلة للتعديل · يتم الحفظ تلقائيًا</div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-icon" id="theme-btn" title="Toggle theme">◐</button>
+      <button class="btn" id="lang-btn">EN / ع</button>
+      <button class="btn" id="add-btn">+ <span data-ar="مبادرة" data-en="Initiative">مبادرة</span></button>
+      <button class="btn" id="reset-btn" data-ar="إعادة تعيين" data-en="Reset">إعادة تعيين</button>
+      <button class="btn" id="print-btn" data-ar="طباعة / PDF" data-en="Print / PDF">طباعة / PDF</button>
+      <button class="btn btn-primary" id="export-btn" data-ar="حفظ ملف" data-en="Save file">حفظ ملف</button>
+    </div>
+  </header>
+
+  <!-- KPIs -->
+  <section class="kpis">
+    <div class="kpi">
+      <div class="kpi-label" data-ar="إجمالي المبادرات" data-en="Total initiatives">إجمالي المبادرات</div>
+      <div class="kpi-value" id="kpi-total">0</div>
+    </div>
+    <div class="kpi success">
+      <div class="kpi-label" data-ar="على المسار" data-en="On track">على المسار</div>
+      <div class="kpi-value" id="kpi-ontrack">0</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label" data-ar="تحت الخطر" data-en="At risk">تحت الخطر</div>
+      <div class="kpi-value" id="kpi-risk">0</div>
+    </div>
+    <div class="kpi danger">
+      <div class="kpi-label" data-ar="متوقفة" data-en="Blocked">متوقفة</div>
+      <div class="kpi-value" id="kpi-blocked">0</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label" data-ar="متوسط الإنجاز" data-en="Avg progress">متوسط الإنجاز</div>
+      <div class="kpi-value" id="kpi-progress">0%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label" data-ar="يجب (Must)" data-en="Must have">يجب (Must)</div>
+      <div class="kpi-value" id="kpi-must" style="color: var(--must-bar);">0</div>
+    </div>
+  </section>
+
+  <!-- MoSCoW + Category legend -->
+  <div class="legend">
+    <div class="legend-group">
+      <span class="legend-group-label" data-ar="الأولوية" data-en="Priority">الأولوية</span>
+      <span class="legend-chip" style="background: var(--must-fill); color: var(--must-text);"><span class="dot" style="background: var(--must-bar);"></span><span data-ar="يجب" data-en="Must">يجب</span></span>
+      <span class="legend-chip" style="background: var(--should-fill); color: var(--should-text);"><span class="dot" style="background: var(--should-bar);"></span><span data-ar="ينبغي" data-en="Should">ينبغي</span></span>
+      <span class="legend-chip" style="background: var(--could-fill); color: var(--could-text);"><span class="dot" style="background: var(--could-bar);"></span><span data-ar="يمكن" data-en="Could">يمكن</span></span>
+      <span class="legend-chip" style="background: var(--wont-fill); color: var(--wont-text);"><span class="dot" style="background: var(--wont-bar);"></span><span data-ar="لن" data-en="Won't">لن</span></span>
+    </div>
+    <div class="legend-group">
+      <span class="legend-group-label" data-ar="الفئة" data-en="Category">الفئة</span>
+      <span class="legend-chip" style="background: var(--erp-fill); color: var(--erp-text);"><span class="dot" style="background: var(--erp-bar);"></span>ERP</span>
+      <span class="legend-chip" style="background: var(--ai-fill); color: var(--ai-text);"><span class="dot" style="background: var(--ai-bar);"></span>AI</span>
+      <span class="legend-chip" style="background: var(--fin-fill); color: var(--fin-text);"><span class="dot" style="background: var(--fin-bar);"></span><span data-ar="مالية" data-en="Finance">مالية</span></span>
+      <span class="legend-chip" style="background: var(--hr-fill); color: var(--hr-text);"><span class="dot" style="background: var(--hr-bar);"></span><span data-ar="موارد بشرية" data-en="HR">موارد بشرية</span></span>
+      <span class="legend-chip" style="background: var(--data-fill); color: var(--data-text);"><span class="dot" style="background: var(--data-bar);"></span><span data-ar="بيانات" data-en="Data">بيانات</span></span>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <span class="filter-label" data-ar="تصفية" data-en="Filter">تصفية</span>
+    <button class="chip active" data-filter="prio" data-value="all" data-ar="الكل" data-en="All">الكل</button>
+    <button class="chip" data-filter="prio" data-value="Must"><span class="dot" style="background: var(--must-bar);"></span><span data-ar="يجب" data-en="Must">يجب</span></button>
+    <button class="chip" data-filter="prio" data-value="Should"><span class="dot" style="background: var(--should-bar);"></span><span data-ar="ينبغي" data-en="Should">ينبغي</span></button>
+    <button class="chip" data-filter="prio" data-value="Could"><span class="dot" style="background: var(--could-bar);"></span><span data-ar="يمكن" data-en="Could">يمكن</span></button>
+    <button class="chip" data-filter="prio" data-value="Won't"><span class="dot" style="background: var(--wont-bar);"></span><span data-ar="لن" data-en="Won't">لن</span></button>
+  </div>
+
+  <!-- Gantt -->
+  <div class="gantt-card">
+    <div class="gantt-head">
+      <div data-ar="المبادرة" data-en="Initiative">المبادرة</div>
+      <div data-ar="الفئة" data-en="Category">الفئة</div>
+      <div data-ar="المسؤول" data-en="Owner">المسؤول</div>
+      <div data-ar="الأولوية" data-en="Priority">الأولوية</div>
+      <div class="q-head">
+        <div>Q1</div><div>Q2</div><div>Q3</div><div>Q4</div>
+      </div>
+      <div></div>
+    </div>
+    <div id="rows"></div>
+  </div>
+
+  <footer class="footer">
+    <span data-ar="يتم الحفظ محليًا في المتصفح · اضغط على الشريط لتعديل التفاصيل · اسحب الحواف لتغيير المدة" data-en="Saved locally in your browser · click a bar for details · drag edges to change duration">
+      يتم الحفظ محليًا في المتصفح · اضغط على الشريط لتعديل التفاصيل · اسحب الحواف لتغيير المدة
+    </span>
+    <span id="save-status" data-ar="محفوظ ✓" data-en="Saved ✓">محفوظ ✓</span>
+  </footer>
+</div>
+
+<!-- Side panel for editing -->
+<div class="panel-overlay" id="panel-overlay"></div>
+<aside class="panel" id="panel">
+  <button class="panel-close" id="panel-close">×</button>
+  <h3 data-ar="تفاصيل المبادرة" data-en="Initiative details">تفاصيل المبادرة</h3>
+  <div class="panel-field">
+    <label data-ar="العنوان (عربي)" data-en="Title (Arabic)">العنوان (عربي)</label>
+    <input type="text" id="f-title-ar">
+  </div>
+  <div class="panel-field">
+    <label data-ar="العنوان (إنجليزي)" data-en="Title (English)">العنوان (إنجليزي)</label>
+    <input type="text" id="f-title-en">
+  </div>
+  <div class="panel-field">
+    <label data-ar="الوصف" data-en="Description">الوصف</label>
+    <textarea id="f-desc"></textarea>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <div class="panel-field">
+      <label data-ar="المسؤول (ع)" data-en="Owner (AR)">المسؤول (ع)</label>
+      <input type="text" id="f-owner-ar">
+    </div>
+    <div class="panel-field">
+      <label data-ar="المسؤول (EN)" data-en="Owner (EN)">المسؤول (EN)</label>
+      <input type="text" id="f-owner-en">
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <div class="panel-field">
+      <label data-ar="الفئة" data-en="Category">الفئة</label>
+      <select id="f-category"></select>
+    </div>
+    <div class="panel-field">
+      <label data-ar="الأولوية (MoSCoW)" data-en="Priority (MoSCoW)">الأولوية (MoSCoW)</label>
+      <select id="f-priority"></select>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <div class="panel-field">
+      <label data-ar="من ربع" data-en="From quarter">من ربع</label>
+      <select id="f-start"><option value="1">Q1</option><option value="2">Q2</option><option value="3">Q3</option><option value="4">Q4</option></select>
+    </div>
+    <div class="panel-field">
+      <label data-ar="إلى ربع" data-en="To quarter">إلى ربع</label>
+      <select id="f-end"><option value="1">Q1</option><option value="2">Q2</option><option value="3">Q3</option><option value="4">Q4</option></select>
+    </div>
+  </div>
+  <div class="panel-field">
+    <label data-ar="الحالة" data-en="Status">الحالة</label>
+    <select id="f-status"></select>
+  </div>
+  <div class="panel-field">
+    <label><span data-ar="نسبة الإنجاز" data-en="Progress">نسبة الإنجاز</span>: <span class="progress-display" id="f-progress-display">0%</span></label>
+    <input type="range" min="0" max="100" step="1" id="f-progress" style="width: 100%; cursor: pointer;">
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// Data model
+// ============================================================
+const CATEGORIES = {
+  'ERP':     { ar: 'تطبيق ERP',     en: 'ERP',     varPrefix: 'erp' },
+  'AI':      { ar: 'ذكاء اصطناعي',   en: 'AI',      varPrefix: 'ai' },
+  'Finance': { ar: 'مالية',           en: 'Finance', varPrefix: 'fin' },
+  'HR':      { ar: 'موارد بشرية',     en: 'HR',      varPrefix: 'hr' },
+  'Data':    { ar: 'بيانات وتحليل',   en: 'Data & BI', varPrefix: 'data' }
+};
+
+const PRIORITIES = {
+  "Must":   { ar: 'يجب',    en: 'Must have',    varPrefix: 'must' },
+  "Should": { ar: 'ينبغي',  en: 'Should have',  varPrefix: 'should' },
+  "Could":  { ar: 'يمكن',   en: 'Could have',   varPrefix: 'could' },
+  "Won't":  { ar: 'لن',     en: "Won't have",   varPrefix: 'wont' }
+};
+
+const STATUSES = {
+  'On track': { ar: 'على المسار',  en: 'On track' },
+  'At risk':  { ar: 'تحت الخطر',    en: 'At risk' },
+  'Blocked':  { ar: 'متوقف',        en: 'Blocked' },
+  'Done':     { ar: 'مكتمل',        en: 'Done' }
+};
+
+const DEFAULT_ROWS = [
+  { id: 1, title_ar: 'تطبيق Odoo — المرحلة الأولى', title_en: 'Odoo rollout — phase 1', category: 'ERP', owner_ar: 'زهدي', owner_en: 'Zohdy', start: 1, end: 2, progress: 70, status: 'On track', priority: 'Must', desc: '' },
+  { id: 2, title_ar: 'تكامل الفوترة ZATCA المرحلة 2', title_en: 'ZATCA phase 2 integration', category: 'Finance', owner_ar: 'قائد المالية', owner_en: 'Finance lead', start: 2, end: 3, progress: 40, status: 'On track', priority: 'Must', desc: '' },
+  { id: 3, title_ar: 'طبقة الأتمتة بالذكاء الاصطناعي', title_en: 'AI automation layer (n8n)', category: 'AI', owner_ar: 'الفريق التقني', owner_en: 'Tech team', start: 2, end: 3, progress: 25, status: 'At risk', priority: 'Should', desc: '' },
+  { id: 4, title_ar: 'إطلاق تطبيق الموظفين ESS', title_en: 'ESS mobile app launch', category: 'HR', owner_ar: 'قسم المنتج', owner_en: 'Product', start: 3, end: 4, progress: 15, status: 'On track', priority: 'Should', desc: '' },
+  { id: 5, title_ar: 'مستودع البيانات و BI', title_en: 'Data warehouse + BI', category: 'Data', owner_ar: 'فريق البيانات', owner_en: 'Data team', start: 4, end: 4, progress: 5, status: 'Blocked', priority: 'Could', desc: '' },
+  { id: 6, title_ar: 'تكامل WhatsApp Business', title_en: 'WhatsApp Business integration', category: 'AI', owner_ar: 'قسم العمليات', owner_en: 'Operations', start: 1, end: 2, progress: 0, status: 'On track', priority: "Won't", desc: '' }
+];
+
+const STORAGE_KEY = 'ceo_roadmap_v2';
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return {
+    rows: JSON.parse(JSON.stringify(DEFAULT_ROWS)),
+    title_ar: 'خارطة الطريق الاستراتيجية — 2026',
+    title_en: 'Strategic Roadmap — 2026',
+    subtitle_ar: 'معدّة لمراجعة الرئيس التنفيذي · جميع الحقول قابلة للتعديل · يتم الحفظ تلقائيًا',
+    subtitle_en: 'Prepared for CEO review · all fields editable · autosaved locally',
+    lang: 'ar',
+    theme: 'dark',
+    filter: 'all'
+  };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    showToast(state.lang === 'ar' ? 'محفوظ ✓' : 'Saved ✓', 1200);
+  } catch(e) {}
+}
+
+let state = loadState();
+let editingId = null;
+
+// ============================================================
+// Helpers
+// ============================================================
+function t(obj, arKey, enKey) {
+  return state.lang === 'ar' ? obj[arKey] : obj[enKey];
+}
+
+function getCatColors(cat) {
+  const p = CATEGORIES[cat].varPrefix;
+  const st = getComputedStyle(document.documentElement);
+  return {
+    fill: st.getPropertyValue(`--${p}-fill`).trim(),
+    bar: st.getPropertyValue(`--${p}-bar`).trim(),
+    text: st.getPropertyValue(`--${p}-text`).trim()
+  };
+}
+function getPrioColors(prio) {
+  const p = PRIORITIES[prio].varPrefix;
+  const st = getComputedStyle(document.documentElement);
+  return {
+    fill: st.getPropertyValue(`--${p}-fill`).trim(),
+    bar: st.getPropertyValue(`--${p}-bar`).trim(),
+    text: st.getPropertyValue(`--${p}-text`).trim()
+  };
+}
+
+function newId() {
+  return Math.max(0, ...state.rows.map(r => r.id || 0)) + 1;
+}
+
+function showToast(msg, duration = 2000) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => el.classList.remove('show'), duration);
+}
+
+// ============================================================
+// Language + theme
+// ============================================================
+function applyLang() {
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+    if (el.id === 'doc-title' || el.id === 'doc-subtitle') return;
+    const txt = state.lang === 'ar' ? el.dataset.ar : el.dataset.en;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = txt;
+    else el.textContent = txt;
+  });
+  document.getElementById('doc-title').textContent = state.lang === 'ar' ? state.title_ar : state.title_en;
+  document.getElementById('doc-subtitle').textContent = state.lang === 'ar' ? state.subtitle_ar : state.subtitle_en;
+}
+
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme;
+  document.getElementById('theme-btn').textContent = state.theme === 'dark' ? '◐' : '◑';
+}
+
+// ============================================================
+// Rendering
+// ============================================================
+const rowsEl = document.getElementById('rows');
+
+function renderRows() {
+  rowsEl.innerHTML = '';
+  const filtered = state.filter === 'all' ? state.rows : state.rows.filter(r => r.priority === state.filter);
+
+  filtered.forEach(r => {
+    const idx = state.rows.indexOf(r);
+    const catColors = getCatColors(r.category);
+    const prioColors = getPrioColors(r.priority);
+
+    const row = document.createElement('div');
+    row.className = 'gantt-row';
+    row.dataset.id = r.id;
+
+    // Title
+    const title = document.createElement('div');
+    title.className = 'cell-title';
+    title.contentEditable = true;
+    title.textContent = t(r, 'title_ar', 'title_en');
+    title.addEventListener('input', () => {
+      if (state.lang === 'ar') r.title_ar = title.textContent;
+      else r.title_en = title.textContent;
+      saveStateDebounced();
+    });
+    row.appendChild(title);
+
+    // Category
+    const catSel = document.createElement('select');
+    catSel.className = 'cat-select';
+    Object.entries(CATEGORIES).forEach(([k, c]) => {
+      const o = document.createElement('option');
+      o.value = k;
+      o.textContent = state.lang === 'ar' ? c.ar : c.en;
+      if (k === r.category) o.selected = true;
+      catSel.appendChild(o);
+    });
+    catSel.style.background = catColors.fill;
+    catSel.style.color = catColors.text;
+    catSel.style.borderColor = catColors.bar;
+    catSel.addEventListener('change', () => {
+      r.category = catSel.value;
+      saveStateDebounced();
+      renderRows();
+      renderKpis();
+    });
+    const catWrap = document.createElement('div');
+    catWrap.appendChild(catSel);
+    row.appendChild(catWrap);
+
+    // Owner
+    const owner = document.createElement('div');
+    owner.className = 'cell-owner';
+    owner.contentEditable = true;
+    owner.textContent = t(r, 'owner_ar', 'owner_en');
+    owner.addEventListener('input', () => {
+      if (state.lang === 'ar') r.owner_ar = owner.textContent;
+      else r.owner_en = owner.textContent;
+      saveStateDebounced();
+    });
+    row.appendChild(owner);
+
+    // Priority (MoSCoW)
+    const prioSel = document.createElement('select');
+    prioSel.className = 'prio-select';
+    Object.entries(PRIORITIES).forEach(([k, p]) => {
+      const o = document.createElement('option');
+      o.value = k;
+      o.textContent = state.lang === 'ar' ? p.ar : p.en;
+      if (k === r.priority) o.selected = true;
+      prioSel.appendChild(o);
+    });
+    prioSel.style.background = prioColors.fill;
+    prioSel.style.color = prioColors.text;
+    prioSel.style.borderColor = prioColors.bar;
+    prioSel.addEventListener('change', () => {
+      r.priority = prioSel.value;
+      saveStateDebounced();
+      renderRows();
+      renderKpis();
+    });
+    const prioWrap = document.createElement('div');
+    prioWrap.appendChild(prioSel);
+    row.appendChild(prioWrap);
+
+    // Gantt bar
+    const cells = document.createElement('div');
+    cells.className = 'gantt-cells';
+    const grid = document.createElement('div');
+    grid.className = 'q-grid';
+    for (let i = 0; i < 4; i++) grid.appendChild(document.createElement('div'));
+    cells.appendChild(grid);
+
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.background = catColors.fill;
+    bar.style.border = `1.5px solid ${prioColors.bar}`;
+    bar.style.color = catColors.text;
+
+    const fill = document.createElement('div');
+    fill.className = 'bar-fill';
+    fill.style.background = catColors.bar;
+
+    const label = document.createElement('div');
+    label.className = 'bar-label';
+
+    const prioDot = document.createElement('span');
+    prioDot.className = 'bar-prio-dot';
+    prioDot.style.background = prioColors.bar;
+
+    const labelTxt = document.createElement('span');
+
+    label.appendChild(prioDot);
+    label.appendChild(labelTxt);
+
+    const hL = document.createElement('div'); hL.className = 'handle handle-l';
+    const hR = document.createElement('div'); hR.className = 'handle handle-r';
+
+    bar.appendChild(fill);
+    bar.appendChild(label);
+    bar.appendChild(hL);
+    bar.appendChild(hR);
+    cells.appendChild(bar);
+
+    function positionBar() {
+      const startPct = ((r.start - 1) / 4) * 100;
+      const widthPct = ((r.end - r.start + 1) / 4) * 100;
+      bar.style.insetInlineStart = `calc(12px + ${startPct}% * (100% - 12px) / 100%)`;
+      // Simpler: use a percentage inside padded container
+      bar.style.insetInlineStart = `calc(${startPct}% * (1 - 12px/100%) + 12px)`;
+      // Actually, position relative to the grid area
+      bar.style.insetInlineStart = `calc(12px + (100% - 12px) * ${startPct / 100})`;
+      bar.style.width = `calc((100% - 12px) * ${widthPct / 100})`;
+      fill.style.width = r.progress + '%';
+      const qLabel = r.start === r.end ? `Q${r.start}` : `Q${r.start}–Q${r.end}`;
+      labelTxt.textContent = `${qLabel} · ${r.progress}%`;
+    }
+    positionBar();
+
+    // Drag logic
+    let dragType = null, startX = 0, startStart = 0, startEnd = 0, cellWidth = 0;
+    function onMouseDown(e, type) {
+      dragType = type;
+      startX = e.clientX;
+      startStart = r.start;
+      startEnd = r.end;
+      cellWidth = (cells.getBoundingClientRect().width - 12) / 4;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    function onMouseMove(e) {
+      const isRTL = document.documentElement.dir === 'rtl';
+      let dx = e.clientX - startX;
+      if (isRTL) dx = -dx;
+      const steps = Math.round(dx / cellWidth);
+      if (dragType === 'move') {
+        const len = startEnd - startStart;
+        let ns = Math.min(4, Math.max(1, startStart + steps));
+        let ne = ns + len;
+        if (ne > 4) { ne = 4; ns = ne - len; }
+        r.start = ns;
+        r.end = ne;
+      } else if (dragType === 'l') {
+        r.start = Math.min(r.end, Math.max(1, startStart + steps));
+      } else if (dragType === 'r') {
+        r.end = Math.max(r.start, Math.min(4, startEnd + steps));
+      }
+      positionBar();
+    }
+    function onMouseUp() {
+      dragType = null;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      saveStateDebounced();
+    }
+    hL.addEventListener('mousedown', e => onMouseDown(e, 'l'));
+    hR.addEventListener('mousedown', e => onMouseDown(e, 'r'));
+    bar.addEventListener('mousedown', e => {
+      if (e.target === hL || e.target === hR) return;
+      onMouseDown(e, 'move');
+    });
+    // Click (no drag) → open panel
+    let downX = 0;
+    bar.addEventListener('mousedown', e => { downX = e.clientX; });
+    bar.addEventListener('click', e => {
+      if (Math.abs(e.clientX - downX) < 3 && e.target !== hL && e.target !== hR) {
+        openPanel(r.id);
+      }
+    });
+
+    row.appendChild(cells);
+
+    // Delete
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn-del';
+    delBtn.textContent = '×';
+    delBtn.addEventListener('click', () => {
+      const confirmMsg = state.lang === 'ar' ? 'حذف هذه المبادرة؟' : 'Delete this initiative?';
+      if (confirm(confirmMsg)) {
+        state.rows = state.rows.filter(x => x.id !== r.id);
+        saveState();
+        renderAll();
+      }
+    });
+    row.appendChild(delBtn);
+
+    rowsEl.appendChild(row);
+  });
+}
+
+function renderKpis() {
+  const total = state.rows.length;
+  const onTrack = state.rows.filter(r => r.status === 'On track' || r.status === 'Done').length;
+  const risk = state.rows.filter(r => r.status === 'At risk').length;
+  const blocked = state.rows.filter(r => r.status === 'Blocked').length;
+  const must = state.rows.filter(r => r.priority === 'Must').length;
+  const avg = total ? Math.round(state.rows.reduce((s, r) => s + r.progress, 0) / total) : 0;
+  document.getElementById('kpi-total').textContent = total;
+  document.getElementById('kpi-ontrack').textContent = onTrack;
+  document.getElementById('kpi-risk').textContent = risk;
+  document.getElementById('kpi-blocked').textContent = blocked;
+  document.getElementById('kpi-progress').textContent = avg + '%';
+  document.getElementById('kpi-must').textContent = must;
+}
+
+function renderAll() {
+  applyLang();
+  renderRows();
+  renderKpis();
+  populatePanelSelects();
+}
+
+// ============================================================
+// Side panel
+// ============================================================
+function populatePanelSelects() {
+  const catSel = document.getElementById('f-category');
+  catSel.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([k, c]) => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = state.lang === 'ar' ? c.ar : c.en;
+    catSel.appendChild(o);
+  });
+
+  const prioSel = document.getElementById('f-priority');
+  prioSel.innerHTML = '';
+  Object.entries(PRIORITIES).forEach(([k, p]) => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = state.lang === 'ar' ? p.ar : p.en;
+    prioSel.appendChild(o);
+  });
+
+  const statusSel = document.getElementById('f-status');
+  statusSel.innerHTML = '';
+  Object.entries(STATUSES).forEach(([k, s]) => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = state.lang === 'ar' ? s.ar : s.en;
+    statusSel.appendChild(o);
+  });
+}
+
+function openPanel(id) {
+  const r = state.rows.find(x => x.id === id);
+  if (!r) return;
+  editingId = id;
+  populatePanelSelects();
+  document.getElementById('f-title-ar').value = r.title_ar || '';
+  document.getElementById('f-title-en').value = r.title_en || '';
+  document.getElementById('f-desc').value = r.desc || '';
+  document.getElementById('f-owner-ar').value = r.owner_ar || '';
+  document.getElementById('f-owner-en').value = r.owner_en || '';
+  document.getElementById('f-category').value = r.category;
+  document.getElementById('f-priority').value = r.priority;
+  document.getElementById('f-start').value = r.start;
+  document.getElementById('f-end').value = r.end;
+  document.getElementById('f-status').value = r.status;
+  document.getElementById('f-progress').value = r.progress;
+  document.getElementById('f-progress-display').textContent = r.progress + '%';
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('panel-overlay').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel-overlay').classList.remove('open');
+  editingId = null;
+}
+
+function bindPanel() {
+  const fields = [
+    ['f-title-ar', 'title_ar'], ['f-title-en', 'title_en'],
+    ['f-desc', 'desc'], ['f-owner-ar', 'owner_ar'], ['f-owner-en', 'owner_en'],
+    ['f-category', 'category'], ['f-priority', 'priority'],
+    ['f-status', 'status']
+  ];
+  fields.forEach(([id, key]) => {
+    document.getElementById(id).addEventListener('input', () => {
+      if (editingId == null) return;
+      const r = state.rows.find(x => x.id === editingId);
+      r[key] = document.getElementById(id).value;
+      saveStateDebounced();
+      renderRows();
+      renderKpis();
+    });
+  });
+  document.getElementById('f-start').addEventListener('change', () => {
+    if (editingId == null) return;
+    const r = state.rows.find(x => x.id === editingId);
+    r.start = parseInt(document.getElementById('f-start').value);
+    if (r.end < r.start) r.end = r.start;
+    document.getElementById('f-end').value = r.end;
+    saveStateDebounced(); renderRows();
+  });
+  document.getElementById('f-end').addEventListener('change', () => {
+    if (editingId == null) return;
+    const r = state.rows.find(x => x.id === editingId);
+    r.end = parseInt(document.getElementById('f-end').value);
+    if (r.start > r.end) r.start = r.end;
+    document.getElementById('f-start').value = r.start;
+    saveStateDebounced(); renderRows();
+  });
+  document.getElementById('f-progress').addEventListener('input', () => {
+    if (editingId == null) return;
+    const r = state.rows.find(x => x.id === editingId);
+    r.progress = parseInt(document.getElementById('f-progress').value);
+    document.getElementById('f-progress-display').textContent = r.progress + '%';
+    saveStateDebounced();
+    renderRows();
+    renderKpis();
+  });
+  document.getElementById('panel-close').addEventListener('click', closePanel);
+  document.getElementById('panel-overlay').addEventListener('click', closePanel);
+}
+
+// ============================================================
+// Top-level actions
+// ============================================================
+function bindActions() {
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    state.lang = state.lang === 'ar' ? 'en' : 'ar';
+    saveState();
+    renderAll();
+  });
+
+  document.getElementById('theme-btn').addEventListener('click', () => {
+    state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    applyTheme();
+    saveState();
+    renderRows();
+  });
+
+  document.getElementById('add-btn').addEventListener('click', () => {
+    const id = newId();
+    state.rows.push({
+      id, title_ar: 'مبادرة جديدة', title_en: 'New initiative',
+      category: 'ERP', owner_ar: 'المسؤول', owner_en: 'Owner',
+      start: 1, end: 1, progress: 0, status: 'On track', priority: 'Could', desc: ''
+    });
+    saveState();
+    renderAll();
+    setTimeout(() => openPanel(id), 100);
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    const msg = state.lang === 'ar' ? 'إعادة تعيين جميع البيانات إلى النسخة الأصلية؟' : 'Reset all data to defaults?';
+    if (confirm(msg)) {
+      localStorage.removeItem(STORAGE_KEY);
+      state = loadState();
+      applyTheme();
+      renderAll();
+    }
+  });
+
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+  document.getElementById('export-btn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `roadmap-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast(state.lang === 'ar' ? 'تم تنزيل الملف' : 'File downloaded');
+  });
+
+  document.getElementById('doc-title').addEventListener('input', e => {
+    if (state.lang === 'ar') state.title_ar = e.target.textContent;
+    else state.title_en = e.target.textContent;
+    saveStateDebounced();
+  });
+  document.getElementById('doc-subtitle').addEventListener('input', e => {
+    if (state.lang === 'ar') state.subtitle_ar = e.target.textContent;
+    else state.subtitle_en = e.target.textContent;
+    saveStateDebounced();
+  });
+
+  document.querySelectorAll('.chip[data-filter="prio"]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip[data-filter="prio"]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.filter = chip.dataset.value;
+      saveState();
+      renderRows();
+    });
+  });
+}
+
+// ============================================================
+// Debounced save
+// ============================================================
+let saveTimer = null;
+function saveStateDebounced() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveState, 400);
+}
+
+// ============================================================
+// Boot
+// ============================================================
+applyTheme();
+bindActions();
+bindPanel();
+renderAll();
+
+// Activate filter chip from state
+const activeChip = document.querySelector(`.chip[data-filter="prio"][data-value="${state.filter}"]`);
+if (activeChip) {
+  document.querySelectorAll('.chip[data-filter="prio"]').forEach(c => c.classList.remove('active'));
+  activeChip.classList.add('active');
+}
+</script>
+</body>
+</html>
